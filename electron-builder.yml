@@ -1,0 +1,24 @@
+appId: app.daily.macrotracker
+productName: Daily
+directories:
+  app: work/desktop-app
+  output: release
+files:
+  - electron/*.cjs
+  - dist-desktop/**/*
+  - package.json
+asar: true
+npmRebuild: false
+artifactName: Daily-${version}-mac-${arch}.${ext}
+mac:
+  category: public.app-category.healthcare-fitness
+  icon: public/icon-512.png
+  target:
+    - target: zip
+      arch:
+        - universal
+  identity: "-"
+  hardenedRuntime: false
+  entitlements: electron/entitlements.mac.plist
+  entitlementsInherit: electron/entitlements.mac.plist
+  notarize: false

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dist-desktop/
+release/
+work/
+private-data/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.DS_Store
