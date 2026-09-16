@@ -31,7 +31,12 @@ jobs:
           api-level: 35
           arch: x86_64
           profile: pixel_6
-          script: cd android && ./gradlew connectedDebugAndroidTest --no-daemon
+          script: cd android && ./gradlew :app:connectedDebugAndroidTest --no-daemon
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Android-test-reports
+          path: android/app/build/reports/androidTests/
       - name: Restore release signing key
         env:
           KEYSTORE: ${{ secrets.DAILY_ANDROID_KEYSTORE }}
@@ -44,7 +49,7 @@ jobs:
         env:
           DAILY_KEYSTORE_PATH: ${{ runner.temp }}/daily.p12
           DAILY_KEYSTORE_PASSWORD: ${{ secrets.DAILY_ANDROID_KEYSTORE_PASSWORD }}
-        run: ./gradlew assembleRelease lintRelease testDebugUnitTest --no-daemon
+        run: ./gradlew :app:assembleRelease :app:lintRelease :app:testDebugUnitTest --no-daemon
       - name: Verify signature and prepare download
         run: |
           mkdir -p artifacts
