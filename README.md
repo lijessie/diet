@@ -1,8 +1,12 @@
 # Daily
 
-[Download Daily for Mac (Apple Silicon and Intel)](https://github.com/lijessie/diet/releases/latest)
+[Download Daily for Mac (Apple Silicon and Intel)](https://github.com/lijessie/diet/releases/tag/v0.2.0)
 
 Open the latest release and download its ZIP. Installation and data-transfer instructions are included with the release.
+
+## Android app
+
+The Android version bundles the app for offline phone use with Capacitor. It supports Android 7.0+ with an up-to-date Android System WebView and includes a native backup save dialog, JSON import, and Android Back-button handling. See [Android installation and build instructions](android/README.md). Android builds are signed with a private release key; personal data and signing keys are excluded from the repository.
 
 ## Desktop app (macOS)
 

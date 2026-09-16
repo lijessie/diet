@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Daily</string>
+    <string name="title_activity_main">Daily</string>
+    <string name="package_name">app.daily.macrotracker</string>
+    <string name="custom_url_scheme">app.daily.macrotracker</string>
+</resources>

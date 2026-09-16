@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Capacitor } from "@capacitor/core";
+import { App as NativeApp } from "@capacitor/app";
 import {
   Apple,
   BookOpen,
@@ -61,6 +63,20 @@ export default function App() {
   const [toast, setToast] = useState("");
   const [storageError, setStorageError] = useState("");
   useEffect(() => {
+    if (Capacitor.getPlatform() !== "android") return;
+    const handle = NativeApp.addListener("backButton", () => {
+      const close = document.querySelector<HTMLButtonElement>(
+        'dialog[open] button[aria-label="Close"]',
+      );
+      if (close) close.click();
+      else if (view !== "Today") setView("Today");
+      else void NativeApp.minimizeApp();
+    });
+    return () => {
+      void handle.then((listener) => listener.remove());
+    };
+  }, [view]);
+  useEffect(() => {
     if (!toast) return;
     const t = setTimeout(() => setToast(""), 5000);
     return () => clearTimeout(t);
@@ -101,14 +117,21 @@ export default function App() {
         <h1>Let’s protect your data</h1>
         <p role="alert">{loaded.error}</p>
         <button
-          onClick={() =>
-            download("daily-recovery.json", {
-              original: localStorage.getItem(STORAGE_KEY),
-            })
-          }
+          onClick={async () => {
+            try {
+              await download("daily-recovery.json", {
+                original: localStorage.getItem(STORAGE_KEY),
+              });
+            } catch {
+              setStorageError(
+                "Recovery backup could not be saved. Please try again.",
+              );
+            }
+          }}
         >
           Export original data
         </button>
+        {storageError && <p role="alert">{storageError}</p>}
         <p>
           To restore a backup, clear only this site’s storage after saving the
           original, then reload and import your backup in Goals.

@@ -1,6 +1,9 @@
 node_modules/
 dist/
 dist-desktop/
+dist-android/
+*.keystore
+*.jks
 release/
 work/
 private-data/

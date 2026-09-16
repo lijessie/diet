@@ -7,6 +7,8 @@ export default tseslint.config(
     ignores: [
       "dist",
       "dist-desktop",
+      "dist-android",
+      "android",
       "release",
       "node_modules",
       "work",

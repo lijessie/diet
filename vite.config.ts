@@ -2,10 +2,17 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig(({ mode }) => ({
-  build: { outDir: mode === "desktop" ? "dist-desktop" : "dist" },
+  build: {
+    outDir:
+      mode === "desktop"
+        ? "dist-desktop"
+        : mode === "android"
+          ? "dist-android"
+          : "dist",
+  },
   plugins: [
     react(),
-    ...(mode === "desktop"
+    ...(["desktop", "android"].includes(mode)
       ? []
       : [
           VitePWA({

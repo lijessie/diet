@@ -321,7 +321,14 @@ export function Goals({
             </p>
             <button
               className="secondary full"
-              onClick={() => download(`daily-backup-${dateKey()}.json`, state)}
+              onClick={async () => {
+                try {
+                  if (await download(`daily-backup-${dateKey()}.json`, state))
+                    notify("Backup exported.");
+                } catch {
+                  notify("Backup could not be saved. Please try again.");
+                }
+              }}
             >
               <Download size={18} />
               Export backup

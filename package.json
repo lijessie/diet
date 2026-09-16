@@ -1,6 +1,6 @@
 {
   "name": "diet",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,9 +15,15 @@
     "desktop:build": "tsc -b && vite build --mode desktop",
     "desktop:start": "pnpm desktop:build && electron .",
     "desktop:package": "pnpm desktop:build && node scripts/stage-desktop.mjs && electron-builder --config electron-builder.yml --mac --publish never",
-    "desktop:test": "node --test electron/*.test.cjs"
+    "desktop:test": "node --test electron/*.test.cjs",
+    "android:build": "tsc -b && vite build --mode android && cap sync android",
+    "android:open": "cap open android",
+    "android:apk": "pnpm android:build && cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/app": "^8.1.1",
+    "@capacitor/core": "^8.5.2",
     "@fontsource-variable/dm-sans": "^5.3.0",
     "@fontsource-variable/manrope": "^5.3.0",
     "decimal.js": "^10.6.0",
@@ -27,6 +33,7 @@
     "zod": "^3.24.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.5.2",
     "@eslint/js": "^9.30.0",
     "@playwright/test": "^1.55.0",
     "@types/react": "^19.1.0",
