@@ -1,5 +1,21 @@
 # Daily
 
+A personal nutrition tracker for meals, macros, and recipes. Built for everyday use, with offline access and data stored on your device.
+
+[Download for macOS](https://github.com/lijessie/diet/releases/tag/v0.2.0) · [Download for Android](https://github.com/lijessie/diet/releases/tag/v0.3.0) · [Run locally](#run)
+
+![Daily’s Today screen showing the daily overview and meal groups](docs/images/daily-overview.png)
+
+*The Today screen on a fresh installation.*
+
+## What you can do
+
+- **Track your day:** log meals and follow calorie and macro progress against your goals.
+- **Build your food library:** save foods and recipes for easy repeat logging.
+- **Keep your data local:** use the app offline and export JSON backups to move your data between devices.
+
+## Downloads and installation
+
 [Download Daily for Mac (Apple Silicon and Intel)](https://github.com/lijessie/diet/releases/tag/v0.2.0)
 
 Open the Mac release and download its ZIP. Installation and data-transfer instructions are included with the release.
@@ -32,7 +48,7 @@ The Electron runtime requires Node only for development. `desktop:package` stage
 
 `electron/main.cjs` uses a stable `daily://app/` origin for persistence. The renderer is sandboxed with context isolation and no Node integration, preload script, or IPC filesystem bridge. Asset routing rejects foreign origins and encoded path traversal; permissions and popups are denied. A content security policy permits only bundled assets. Desktop builds exclude the web service worker, preventing old cached assets after an update.
 
-A mobile-first, single-user macro tracker in the existing `lijessie/diet` repository. The repository was empty at implementation start; React, TypeScript and Vite provide a small static PWA without accounts or a server database.
+Built with React, TypeScript, and Vite, with Electron for macOS and Capacitor for Android.
 
 ## Run
 
